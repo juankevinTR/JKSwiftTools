@@ -1,3 +1,3 @@
 # JKSwiftTools
 
-A description of this package.
+Swift Package Manager (SPM) to reuse useful tools, in other projects.
