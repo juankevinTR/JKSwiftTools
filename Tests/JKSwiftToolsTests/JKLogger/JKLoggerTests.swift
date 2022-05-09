@@ -10,60 +10,60 @@ import XCTest
 import os
 
 class MockedLoggable: Loggable {
-	var mockLog: JKLogger!
+    var mockLog: JKLogger!
 
-	func setDefaultLogger() {
-		mockLog = JKLogger()
-	}
+    func setDefaultLogger() {
+        mockLog = JKLogger()
+    }
 
-	func setLoggerWithSubsystemCategory(subsystem: String, category: String) {
-		mockLog = JKLogger(subsystem: subsystem, category: category)
-	}
+    func setLoggerWithSubsystemCategory(subsystem: String, category: String) {
+        mockLog = JKLogger(subsystem: subsystem, category: category)
+    }
 }
 
 class JKLoggerTests: XCTestCase {
 
-	var mockedLoggable: MockedLoggable!
+    var mockedLoggable: MockedLoggable!
 
     override func setUpWithError() throws {
-		mockedLoggable = MockedLoggable()
-	}
+        mockedLoggable = MockedLoggable()
+    }
 
     override func tearDownWithError() throws {}
 
-	func test_messageWithEmoji() throws {
-		let message: String = "messageWithEmoji"
-		let jkLoggerLevelEmoji: JKLoggerLevelEmoji = .trace
+    func test_messageWithEmoji() throws {
+        let message: String = "messageWithEmoji"
+        let jkLoggerLevelEmoji: JKLoggerLevelEmoji = .trace
 
-		let result = JKLogger().messageWithEmoji(message, jkLoggerLevelEmoji)
+        let result = JKLogger().messageWithEmoji(message, jkLoggerLevelEmoji)
 
-		XCTAssertEqual("💬 \(message)", result)
-		XCTAssertNotEqual("❌ \(message)", result)
-	}
+        XCTAssertEqual("💬 \(message)", result)
+        XCTAssertNotEqual("❌ \(message)", result)
+    }
 
-	func test_log_loggableExtension() throws {
-		mockedLoggable = MockedLoggable()
+    func test_log_loggableExtension() throws {
+        mockedLoggable = MockedLoggable()
 
-		let log: JKLogger = mockedLoggable.log
+        let log: JKLogger = mockedLoggable.log
 
-		XCTAssertNotNil(log)
-	}
+        XCTAssertNotNil(log)
+    }
 
-	func test_init_default() throws {
-		mockedLoggable.setDefaultLogger()
+    func test_init_default() throws {
+        mockedLoggable.setDefaultLogger()
 
-		let logger: Logger = mockedLoggable.mockLog.logger
+        let logger: Logger = mockedLoggable.mockLog.logger
 
-		XCTAssertNotNil(logger)
-	}
+        XCTAssertNotNil(logger)
+    }
 
-	func test_init_SubsystemCategory() throws {
-		mockedLoggable.setLoggerWithSubsystemCategory(
-			subsystem: "subsystem", category: "category"
-		)
+    func test_init_SubsystemCategory() throws {
+        mockedLoggable.setLoggerWithSubsystemCategory(
+            subsystem: "subsystem", category: "category"
+        )
 
-		let logger: Logger = mockedLoggable.mockLog.logger
+        let logger: Logger = mockedLoggable.mockLog.logger
 
-		XCTAssertNotNil(logger)
-	}
+        XCTAssertNotNil(logger)
+    }
 }
