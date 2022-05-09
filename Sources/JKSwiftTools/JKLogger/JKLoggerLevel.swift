@@ -8,5 +8,5 @@
 import Foundation
 
 private enum JKLoggerLevel: String {
-	case trace, debug, info, notice, warning, error, fault, critical
+    case trace, debug, info, notice, warning, error, fault, critical
 }
